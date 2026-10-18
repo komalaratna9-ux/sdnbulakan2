@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Media Pembelajaran SDN Bulakan 2 — By Ratna Komala</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Dekorasi Cahaya Latar Modern -->
+  <div class="bg-glow g1"></div>
+  <div class="bg-glow g2"></div>
+  <div class="bg-glow g3"></div>
+
+  <div class="app-wrapper">
+    <!-- ================= PANEL KONTROL ATAS (GLOBAL HEADER) ================= -->
+    <header class="top-header">
+      <div class="header-row-main">
+        <!-- Kiri: Identitas SDN Bulakan 2 & Tombol Menu Pelajaran -->
+        <div class="brand-mini">
+          <button id="btn-go-lobby" class="ctrl-btn btn-home" type="button">🏠 Menu Pelajaran</button>
+          <div class="school-badge">🏫 SDN Bulakan 2</div>
+          <div class="brand-titles">
+            <span class="main-t">Media Pembelajaran Interaktif</span>
+            <span class="sub-t">✨ By Ratna Komala</span>
+          </div>
+        </div>
+
+        <!-- Tengah: Kontrol Misi Bahasa Indonesia (Muncul saat Game B.Indo aktif) -->
+        <div id="bindo-controls" class="mission-group" style="display:none;">
+          <span class="teacher-badge">👩‍🏫 Misi:</span>
+          <button class="mission-btn bindo-m-btn active" data-mission="PREPOSISI" type="button">
+            📍 Kata Depan
+          </button>
+          <button class="mission-btn bindo-m-btn" data-mission="IMBUHAN" type="button">
+            ⚡ Imbuhan
+          </button>
+          <button class="mission-btn bindo-m-btn" data-mission="EJAAN_BENAR" type="button">
+            ✅ Ejaan Benar
+          </button>
+          <button id="btn-speed" class="ctrl-btn" type="button">🐢 Santai</button>
+          <button id="btn-open-materi" class="ctrl-btn" type="button">📖 Materi</button>
+        </div>
+
+        <!-- Tengah: Kontrol Topik Matematika (Muncul saat Game Matematika aktif) -->
+        <div id="math-controls" class="mission-group" style="display:none;">
+          <span class="teacher-badge">🧮 Soal:</span>
+          <button class="mission-btn math-m-btn active" data-math-mode="MIX" type="button">
+            ➕➖ Campuran (5 Soal)
+          </button>
+          <button class="mission-btn math-m-btn" data-math-mode="ADD" type="button">
+            ➕ Penjumlahan
+          </button>
+          <button class="mission-btn math-m-btn" data-math-mode="SUB" type="button">
+            ➖ Pengurangan
+          </button>
+          <button id="btn-new-math-quiz" class="ctrl-btn" type="button" style="background:#0284c7;border-color:#7dd3fc;">
+            🔄 Acak 5 Soal Baru
+          </button>
+        </div>
+
+        <!-- Kanan: Pengaturan Waktu, Musik Riang, Efek Suara & Skor -->
+        <div class="controls-group">
+          <div id="time-pill-wrapper" class="time-control-pill" title="Pengaturan Waktu Bermain" style="display:none;">
+            <span>⏱</span>
+            <div id="timer-box" class="timer-display">01:00</div>
+            <select id="time-preset" class="time-preset-select" aria-label="Pilih Durasi Waktu">
+              <option value="30">30 Detik</option>
+              <option value="60" selected>1 Menit</option>
+              <option value="120">2 Menit</option>
+              <option value="180">3 Menit</option>
+              <option value="0">∞ Tanpa Waktu</option>
+            </select>
+          </div>
+
+          <button id="btn-play-pause" class="ctrl-btn btn-play" type="button" style="display:none;">⏸ Jeda</button>
+          <button id="btn-music" class="ctrl-btn btn-music active" type="button">🎵 Musik: ON</button>
+          <button id="btn-sound" class="ctrl-btn" type="button">🔊 Efek: ON</button>
+          <button id="btn-open-podium" class="ctrl-btn btn-podium" type="button">🏆 Skor</button>
+          <button id="btn-fullscreen" class="ctrl-btn" type="button" title="Layar Penuh">⛶</button>
+        </div>
+      </div>
+
+      <!-- Baris Kedua: Instruksi Aktif -->
+      <div id="active-prompt-pill" class="mission-banner-bar">
+        🌟 Selamat Datang di <strong>Media Pembelajaran SDN Bulakan 2 — By Ratna Komala</strong>! Pilih mata pelajaran di bawah untuk mulai bermain 3 siswa sekaligus.
+      </div>
+    </header>
+
+    <!-- ================= SCREEN 0: MENU AWAL PILIH PELAJARAN (LOBBY) ================= -->
+    <section id="screen-lobby" class="screen-view active">
+      <div class="lobby-container">
+        <div class="lobby-hero">
+          <span class="lobby-school-pill">🏫 PAPAN INTERAKTIF DIGITAL (PID) — 3 PEMAIN SIMULTAN</span>
+          <h1>Media Pembelajaran SDN Bulakan 2</h1>
+          <div class="lobby-author">👩‍🏫 Karya: <strong>Ratna Komala</strong></div>
+        </div>
+
+        <!-- Pengaturan Nama & Avatar 3 Siswa -->
+        <div class="lobby-players-bar">
+          <div class="lobby-section-title">👥 Daftar 3 Siswa yang Bermain (Ketuk Ikon Hewan untuk Ganti Avatar &amp; Ketik Nama)</div>
+          <div class="lobby-players-grid">
+            <div class="lobby-p-card p1">
+              <button id="lobby-av-1" class="lobby-av-btn" type="button">🦁</button>
+              <div style="flex:1;">
+                <span style="font-size:0.72rem;color:#7dd3fc;font-weight:800;">PEMAIN 1 (KIRI)</span>
+                <input id="lobby-name-1" type="text" value="Siswa 1" placeholder="Nama Siswa 1" />
+              </div>
+            </div>
+
+            <div class="lobby-p-card p2">
+              <button id="lobby-av-2" class="lobby-av-btn" type="button">🐼</button>
+              <div style="flex:1;">
+                <span style="font-size:0.72rem;color:#6ee7b7;font-weight:800;">PEMAIN 2 (TENGAH)</span>
+                <input id="lobby-name-2" type="text" value="Siswa 2" placeholder="Nama Siswa 2" />
+              </div>
+            </div>
+
+            <div class="lobby-p-card p3">
+              <button id="lobby-av-3" class="lobby-av-btn" type="button">🐯</button>
+              <div style="flex:1;">
+                <span style="font-size:0.72rem;color:#fde047;font-weight:800;">PEMAIN 3 (KANAN)</span>
+                <input id="lobby-name-3" type="text" value="Siswa 3" placeholder="Nama Siswa 3" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pilihan 2 Game Mata Pelajaran -->
+        <div class="subject-cards-grid">
+          <!-- Game 1: Bahasa Indonesia -->
+          <div id="card-launch-bindo" class="subject-card card-bindo">
+            <div>
+              <div class="subject-top">
+                <div class="subject-icon">🫧</div>
+                <div>
+                  <span class="subject-tag">MATA PELAJARAN 1</span>
+                  <div class="subject-title">Bahasa Indonesia</div>
+                </div>
+              </div>
+              <p class="subject-desc" style="margin-top:10px;">
+                <strong>Topik: Mengenal Kata Depan "di" vs Imbuhan "di-"</strong><br />
+                Tiga siswa bermain bersamaan meletuskan gelembung kata yang melayang naik ke atas sesuai permintaan Guru!
+              </p>
+            </div>
+            <button class="subject-play-btn" type="button">
+              🫧 Mainkan Gelembung Bahasa Indonesia ▶
+            </button>
+          </div>
+
+          <!-- Game 2: Matematika -->
+          <div id="card-launch-math" class="subject-card card-math">
+            <div>
+              <div class="subject-top">
+                <div class="subject-icon">🧮</div>
+                <div>
+                  <span class="subject-tag">MATA PELAJARAN 2</span>
+                  <div class="subject-title">Matematika</div>
+                </div>
+              </div>
+              <p class="subject-desc" style="margin-top:10px;">
+                <strong>Topik: Soal Cerita Penjumlahan &amp; Pengurangan</strong><br />
+                Tiga siswa berlomba mengerjakan masing-masing <strong>5 Soal Cerita Pendek Matematika</strong> secara interaktif di layar sentuh!
+              </p>
+            </div>
+            <button class="subject-play-btn" type="button">
+              🧮 Mainkan Kuis 5 Soal Matematika ▶
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SCREEN 1: GAME BAHASA INDONESIA (BUBBLE POP 3 PEMAIN) ================= -->
+    <section id="screen-bindo" class="screen-view">
+      <div class="arena-grid">
+        <!-- Kolom Pemain 1 -->
+        <div class="player-column col-1">
+          <div class="player-header">
+            <div class="player-info">
+              <div id="bindo-av-1" class="player-avatar">🦁</div>
+              <div>
+                <div id="bindo-name-1" class="player-name">Siswa 1</div>
+                <span class="player-sub">Pecahkan gelembung yang tepat!</span>
+              </div>
+            </div>
+            <div class="player-score-box">
+              <span id="bindo-score-1" class="score-number">0</span>
+              <span class="score-unit">Poin</span>
+            </div>
+          </div>
+          <div id="stage-p1" class="bubble-stage"></div>
+        </div>
+
+        <!-- Kolom Pemain 2 -->
+        <div class="player-column col-2">
+          <div class="player-header">
+            <div class="player-info">
+              <div id="bindo-av-2" class="player-avatar">🐼</div>
+              <div>
+                <div id="bindo-name-2" class="player-name">Siswa 2</div>
+                <span class="player-sub">Pecahkan gelembung yang tepat!</span>
+              </div>
+            </div>
+            <div class="player-score-box">
+              <span id="bindo-score-2" class="score-number">0</span>
+              <span class="score-unit">Poin</span>
+            </div>
+          </div>
+          <div id="stage-p2" class="bubble-stage"></div>
+        </div>
+
+        <!-- Kolom Pemain 3 -->
+        <div class="player-column col-3">
+          <div class="player-header">
+            <div class="player-info">
+              <div id="bindo-av-3" class="player-avatar">🐯</div>
+              <div>
+                <div id="bindo-name-3" class="player-name">Siswa 3</div>
+                <span class="player-sub">Pecahkan gelembung yang tepat!</span>
+              </div>
+            </div>
+            <div class="player-score-box">
+              <span id="bindo-score-3" class="score-number">0</span>
+              <span class="score-unit">Poin</span>
+            </div>
+          </div>
+          <div id="stage-p3" class="bubble-stage"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SCREEN 2: GAME MATEMATIKA (KUIS 5 SOAL CERITA 3 PEMAIN) ================= -->
+    <section id="screen-math" class="screen-view">
+      <div class="arena-grid">
+        <!-- Kolom Matematika Pemain 1 -->
+        <div class="player-column col-1">
+          <div class="player-header">
+            <div class="player-info">
+              <div id="math-av-1" class="player-avatar">🦁</div>
+              <div>
+                <div id="math-name-1" class="player-name">Siswa 1</div>
+                <span class="player-sub">Kuis 5 Soal Cerita</span>
+              </div>
+            </div>
+            <div class="player-score-box">
+              <span id="math-score-1" class="score-number">0</span>
+              <span class="score-unit">Poin</span>
+            </div>
+          </div>
+          <div id="math-body-1" class="math-lane-body"></div>
+        </div>
+
+        <!-- Kolom Matematika Pemain 2 -->
+        <div class="player-column col-2">
+          <div class="player-header">
+            <div class="player-info">
+              <div id="math-av-2" class="player-avatar">🐼</div>
+              <div>
+                <div id="math-name-2" class="player-name">Siswa 2</div>
+                <span class="player-sub">Kuis 5 Soal Cerita</span>
+              </div>
+            </div>
+            <div class="player-score-box">
+              <span id="math-score-2" class="score-number">0</span>
+              <span class="score-unit">Poin</span>
+            </div>
+          </div>
+          <div id="math-body-2" class="math-lane-body"></div>
+        </div>
+
+        <!-- Kolom Matematika Pemain 3 -->
+        <div class="player-column col-3">
+          <div class="player-header">
+            <div class="player-info">
+              <div id="math-av-3" class="player-avatar">🐯</div>
+              <div>
+                <div id="math-name-3" class="player-name">Siswa 3</div>
+                <span class="player-sub">Kuis 5 Soal Cerita</span>
+              </div>
+            </div>
+            <div class="player-score-box">
+              <span id="math-score-3" class="score-number">0</span>
+              <span class="score-unit">Poin</span>
+            </div>
+          </div>
+          <div id="math-body-3" class="math-lane-body"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ================= MODAL MATERI SINGKAT BAHASA INDONESIA ================= -->
+  <div id="materi-modal" class="modal-backdrop">
+    <div class="modal-sheet">
+      <h2>📖 Mengenal "di" Kata Depan vs "di-" Imbuhan</h2>
+
+      <div class="materi-cards">
+        <div class="m-card prep">
+          <h3>📍 "di" sebagai Kata Depan</h3>
+          <p>Menunjukkan <strong>tempat, lokasi, atau arah</strong> (bisa diuji dengan tanya <em>"Di mana?"</em>). Penulisannya wajib <strong>DIPISAH</strong>.</p>
+          <div class="m-examples">
+            <span class="m-pill">di sekolah</span>
+            <span class="m-pill">di rumah</span>
+            <span class="m-pill">di pasar</span>
+            <span class="m-pill">di atas</span>
+            <span class="m-pill">di kelas</span>
+          </div>
+        </div>
+
+        <div class="m-card imb">
+          <h3>⚡ "di-" sebagai Kata Imbuhan</h3>
+          <p>Menunjukkan <strong>kata kerja pasif / perbuatan</strong> (bisa diubah menjadi awalan <em>"me-"</em>). Penulisannya wajib <strong>DIGABUNG</strong>.</p>
+          <div class="m-examples">
+            <span class="m-pill">dimakan</span>
+            <span class="m-pill">ditulis</span>
+            <span class="m-pill">dibaca</span>
+            <span class="m-pill">dibeli</span>
+            <span class="m-pill">dicuci</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;justify-content:center;gap:12px;">
+        <button id="btn-close-materi" class="ctrl-btn btn-play" type="button" style="padding:12px 28px;font-size:1.05rem;">
+          🫧 Mengerti &amp; Lanjut Bermain!
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL PODIUM SKOR ================= -->
+  <div id="podium-modal" class="modal-backdrop">
+    <div class="modal-sheet">
+      <h2>🏆 Podium Skor — SDN Bulakan 2 🏆</h2>
+      <p id="podium-subtitle" style="text-align:center;color:#cbd5e1;font-size:0.95rem;">Hasil Permainan 3 Siswa</p>
+      <div id="podium-list" class="podium-row"></div>
+      <div style="display:flex;justify-content:center;gap:12px;margin-top:8px;">
+        <button id="btn-reset-game" class="ctrl-btn btn-play" type="button" style="padding:12px 24px;font-size:1rem;">
+          🔄 Main Babak Baru (Reset Poin)
+        </button>
+        <button id="btn-podium-to-lobby" class="ctrl-btn btn-home" type="button" style="padding:12px 24px;font-size:1rem;">
+          🏠 Pilih Mata Pelajaran Lain
+        </button>
+        <button id="btn-close-podium" class="ctrl-btn" type="button" style="padding:12px 24px;font-size:1rem;">
+          ✖ Tutup
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
