@@ -1,11 +1,8 @@
 // ============================================================================
 // MEDIA PEMBELAJARAN SDN BULAKAN 2 — BY RATNA KOMALA
-// Papan Interaktif Digital (PID) 3 Pemain Simultan:
-// 1) Bahasa Indonesia: Gelembung Kata "di" (Kata Depan vs Imbuhan)
-// 2) Matematika: Kuis 5 Soal Cerita Pendek Penjumlahan & Pengurangan
+// Responsif untuk Semua Perangkat (Smart TV PID, Laptop, Tablet, & HP Smartphone)
 // ============================================================================
 
-// --- BANK KATA BAHASA INDONESIA ---
 const WORD_BANK = [
   // KATA DEPAN (PREPOSISI) - DIPISAH
   { word: "di sekolah", type: "preposisi", valid: true, points: 10, note: "Tempat (Dipisah)" },
@@ -61,7 +58,6 @@ const WORD_BANK = [
   { word: "di cuci", type: "imbuhan", valid: false, points: 10, note: "Salah! Harusnya: dicuci" }
 ];
 
-// --- BANK SOAL CERITA PENDEK MATEMATIKA (PENJUMLAHAN & PENGURANGAN) ---
 const MATH_STORY_BANK = [
   // PENJUMLAHAN (ADD)
   {
@@ -256,6 +252,7 @@ const SPEED_MODES = [
 
 const state = {
   currentView: "lobby", // 'lobby' | 'bindo' | 'math'
+  mobileTab: "1", // '1' | '2' | '3' | 'all'
   missionKey: "PREPOSISI",
   mathMode: "MIX", // 'MIX' | 'ADD' | 'SUB'
   isPlaying: false,
@@ -430,7 +427,7 @@ function shuffleArray(arr) {
 }
 
 // ============================================================================
-// SINKRONISASI NAMA PEMAIN & PERPINDAHAN LAYAR (LOBBY / B.INDO / MATEMATIKA)
+// SINKRONISASI NAMA PEMAIN, TAB MOBILE, & PERPINDAHAN LAYAR
 // ============================================================================
 function syncPlayerNamesFromLobby() {
   [1, 2, 3].forEach((id) => {
@@ -443,6 +440,36 @@ function syncPlayerNamesFromLobby() {
     document.getElementById(`bindo-av-${id}`).textContent = p.avatar;
     document.getElementById(`math-name-${id}`).textContent = p.name;
     document.getElementById(`math-av-${id}`).textContent = p.avatar;
+
+    // Sinkronkan juga ke Tab Mobile HP
+    document.getElementById(`mtab-name-${id}`).textContent = p.name;
+    document.getElementById(`mtab-av-${id}`).textContent = p.avatar;
+  });
+}
+
+function updateScoreDisplays(playerId, scoreVal) {
+  document.getElementById(`bindo-score-${playerId}`).textContent = scoreVal;
+  document.getElementById(`math-score-${playerId}`).textContent = scoreVal;
+  document.getElementById(`mtab-score-${playerId}`).textContent = scoreVal;
+}
+
+function setMobileTab(tabValue) {
+  state.mobileTab = tabValue;
+  document.querySelectorAll(".m-tab-btn").forEach((btn) => {
+    btn.classList.toggle("active", btn.dataset.tab === tabValue);
+  });
+
+  const arenas = [document.getElementById("arena-bindo"), document.getElementById("arena-math")];
+  arenas.forEach((arena) => {
+    if (!arena) return;
+    if (tabValue === "all") {
+      arena.classList.remove("mobile-single-mode");
+    } else {
+      arena.classList.add("mobile-single-mode");
+      arena.querySelectorAll(".player-column").forEach((col) => {
+        col.classList.toggle("mobile-active-col", col.dataset.playerCol === tabValue);
+      });
+    }
   });
 }
 
@@ -456,13 +483,19 @@ function switchView(viewName) {
   document.getElementById("time-pill-wrapper").style.display = viewName === "lobby" ? "none" : "flex";
   document.getElementById("btn-play-pause").style.display = viewName === "bindo" ? "flex" : "none";
 
+  // Tampilkan Tab Switcher Pemain pada HP ketika di dalam game
+  const mobileTabsEl = document.getElementById("mobile-player-tabs");
+  if (mobileTabsEl) {
+    mobileTabsEl.classList.toggle("visible-in-game", viewName !== "lobby");
+  }
+
   const promptEl = document.getElementById("active-prompt-pill");
 
   if (viewName === "lobby") {
     state.isPlaying = false;
     document.getElementById("screen-lobby").classList.add("active");
     promptEl.innerHTML =
-      "🌟 Selamat Datang di <strong>Media Pembelajaran SDN Bulakan 2 — By Ratna Komala</strong>! Pilih mata pelajaran di bawah untuk mulai bermain 3 siswa sekaligus.";
+      "🌟 Selamat Datang di <strong>Media Pembelajaran SDN Bulakan 2 — By Ratna Komala</strong>! Pilih mata pelajaran di bawah untuk mulai bermain.";
   } else if (viewName === "bindo") {
     document.getElementById("screen-bindo").classList.add("active");
     resetScoresAndTimer();
@@ -488,8 +521,7 @@ function resetScoresAndTimer() {
       if (b.el && b.el.parentNode) b.el.parentNode.removeChild(b.el);
     });
     p.bubbles = [];
-    document.getElementById(`bindo-score-${p.id}`).textContent = "0";
-    document.getElementById(`math-score-${p.id}`).textContent = "0";
+    updateScoreDisplays(p.id, 0);
   });
 }
 
@@ -502,13 +534,13 @@ function formatWordForBubble(word) {
     ? Math.max(...word.split(" ").map((p) => p.length))
     : word.length;
 
-  let fontSize = "1.22rem";
+  let fontSize = "1.15rem";
   if (longestPart >= 11) {
-    fontSize = "0.92rem";
+    fontSize = "0.88rem";
   } else if (longestPart >= 9) {
-    fontSize = "1.02rem";
+    fontSize = "0.98rem";
   } else if (longestPart >= 7) {
-    fontSize = "1.12rem";
+    fontSize = "1.08rem";
   }
 
   const displayHtml = hasSpace ? word.replace(" ", "<br>") : word;
@@ -523,8 +555,8 @@ function spawnBubbleForPlayer(playerIdx) {
 
   if (player.bubbles.length >= 5) return;
 
-  const stageWidth = stageEl.clientWidth || 340;
-  const bubbleSize = Math.min(124, Math.max(100, Math.floor(stageWidth * 0.34)));
+  const stageWidth = stageEl.clientWidth || 320;
+  const bubbleSize = Math.min(122, Math.max(92, Math.floor(stageWidth * 0.34)));
 
   const tooCloseAtBottom = player.bubbles.some((b) => b.y < bubbleSize * 0.85);
   if (tooCloseAtBottom) return;
@@ -543,7 +575,7 @@ function spawnBubbleForPlayer(playerIdx) {
   player.nextTrack = 1 - player.nextTrack;
 
   const halfWidth = stageWidth / 2;
-  const margin = 10;
+  const margin = 8;
   let minX, maxX;
   if (track === 0) {
     minX = margin;
@@ -616,14 +648,7 @@ function popBubble(playerIdx, bubbleObj) {
     spawnFloatingScore(stageEl, bubbleObj.x + bubbleObj.size / 2, bubbleObj.y + bubbleObj.size / 2, `-${penalty}`, bubbleObj.item.note, false);
   }
 
-  const scoreEl = document.getElementById(`bindo-score-${player.id}`);
-  if (scoreEl) {
-    scoreEl.textContent = player.score;
-    scoreEl.style.transform = "scale(1.28)";
-    setTimeout(() => {
-      scoreEl.style.transform = "scale(1)";
-    }, 160);
-  }
+  updateScoreDisplays(player.id, player.score);
 
   setTimeout(() => {
     if (bubbleObj.el && bubbleObj.el.parentNode) {
@@ -637,10 +662,10 @@ function spawnFloatingScore(stageEl, centerX, bottomY, scoreText, noteText, isPl
   if (!stageEl) return;
   const floatEl = document.createElement("div");
   floatEl.className = `floating-score ${isPlus ? "plus" : "minus"}`;
-  const stageWidth = stageEl.clientWidth || 340;
-  const clampedX = Math.min(stageWidth - 150, Math.max(10, centerX - 70));
+  const stageWidth = stageEl.clientWidth || 300;
+  const clampedX = Math.min(stageWidth - 135, Math.max(8, centerX - 65));
   floatEl.style.left = `${clampedX}px`;
-  floatEl.style.bottom = `${Math.max(24, bottomY)}px`;
+  floatEl.style.bottom = `${Math.max(20, bottomY)}px`;
   floatEl.innerHTML = `
     <div>${scoreText}</div>
     <span class="float-note">${noteText}</span>
@@ -652,7 +677,7 @@ function spawnFloatingScore(stageEl, centerX, bottomY, scoreText, noteText, isPl
 }
 
 function resolveBubbleCollisions(bubbles, stageWidth) {
-  const minGap = 10;
+  const minGap = 8;
   for (let i = 0; i < bubbles.length; i++) {
     for (let j = i + 1; j < bubbles.length; j++) {
       const a = bubbles[i];
@@ -674,8 +699,8 @@ function resolveBubbleCollisions(bubbles, stageWidth) {
         const nx = dx / dist;
         const ny = dy / dist;
 
-        a.x = Math.max(6, Math.min(stageWidth - a.size - 6, a.x - nx * overlap));
-        b.x = Math.max(6, Math.min(stageWidth - b.size - 6, b.x + nx * overlap));
+        a.x = Math.max(4, Math.min(stageWidth - a.size - 4, a.x - nx * overlap));
+        b.x = Math.max(4, Math.min(stageWidth - b.size - 4, b.x + nx * overlap));
         a.y -= ny * overlap;
         b.y += ny * overlap;
       }
@@ -692,8 +717,8 @@ function updateLoop(now) {
 
     state.players.forEach((player, idx) => {
       const stageEl = document.getElementById(`stage-p${player.id}`);
-      const stageHeight = stageEl ? stageEl.clientHeight : 600;
-      const stageWidth = stageEl ? stageEl.clientWidth : 340;
+      const stageHeight = stageEl ? stageEl.clientHeight : 550;
+      const stageWidth = stageEl ? stageEl.clientWidth : 320;
 
       if (now - player.lastSpawn > speedCfg.spawnIntervalMs) {
         player.lastSpawn = now;
@@ -743,7 +768,7 @@ function startNewMathQuizRound() {
       : "Campuran Penjumlahan & Pengurangan";
 
   document.getElementById("active-prompt-pill").innerHTML = `
-    🧮 Kuis Matematika (${modeLabel}): Setiap siswa mengerjakan <strong>5 Soal Cerita Pendek</strong> (Benar +20 Poin, Total Maksimal 100 Poin)!
+    🧮 Kuis Matematika (${modeLabel}): Setiap siswa mengerjakan <strong>5 Soal Cerita Pendek</strong> (Benar +20 Poin, Total 100 Poin)!
   `;
 
   let pool = MATH_STORY_BANK;
@@ -759,7 +784,7 @@ function startNewMathQuizRound() {
       shuffledOptions: shuffleArray(q.options)
     }));
     p.mathIndex = 0;
-    p.mathResults = [null, null, null, null, null]; // 'ok' | 'err'
+    p.mathResults = [null, null, null, null, null];
     p.mathLocked = false;
     renderPlayerMathCard(idx);
   });
@@ -770,7 +795,6 @@ function renderPlayerMathCard(playerIdx) {
   const container = document.getElementById(`math-body-${player.id}`);
   if (!container) return;
 
-  // Buat indikator bulat 5 soal
   const dotsHtml = [0, 1, 2, 3, 4]
     .map((i) => {
       let cls = "math-dot";
@@ -781,7 +805,6 @@ function renderPlayerMathCard(playerIdx) {
     })
     .join("");
 
-  // Jika sudah selesai semua 5 soal
   if (player.mathIndex >= 5) {
     container.innerHTML = `
       <div class="math-progress-row">
@@ -789,13 +812,13 @@ function renderPlayerMathCard(playerIdx) {
         <div class="math-dots">${dotsHtml}</div>
       </div>
       <div class="math-finish-panel">
-        <div style="font-size:3.2rem;">🎉 ${player.avatar}</div>
-        <h3 style="font-family:var(--font-display);font-size:1.45rem;color:#fde047;">Hebat, ${player.name}!</h3>
-        <p style="color:#e2e8f0;font-size:1rem;">Kamu telah menyelesaikan ke-5 soal cerita Matematika!</p>
-        <div style="font-family:var(--font-display);font-size:2.2rem;font-weight:700;color:#4ade80;margin-top:4px;">
+        <div style="font-size:3rem;">🎉 ${player.avatar}</div>
+        <h3 style="font-family:var(--font-display);font-size:1.35rem;color:#fde047;">Hebat, ${player.name}!</h3>
+        <p style="color:#e2e8f0;font-size:0.95rem;">Kamu telah menyelesaikan ke-5 soal cerita Matematika!</p>
+        <div style="font-family:var(--font-display);font-size:2rem;font-weight:700;color:#4ade80;margin-top:4px;">
           Nilai: ${player.score} / 100
         </div>
-        <div style="font-size:0.9rem;color:#cbd5e1;">
+        <div style="font-size:0.88rem;color:#cbd5e1;">
           ✅ Benar: ${player.correct} Soal &nbsp;|&nbsp; ❌ Salah: ${player.wrong} Soal
         </div>
       </div>
@@ -869,7 +892,6 @@ function handleMathAnswer(playerIdx, chosenAnswer, btnEl) {
     playFeedbackSound(false, playerIdx);
     btnEl.classList.add("opt-wrong");
 
-    // Tunjukkan tombol mana yang benar
     const allBtns = document.querySelectorAll(`#math-opts-p${player.id} .math-opt-btn`);
     allBtns.forEach((b) => {
       if (b.textContent === currentQ.answer) b.classList.add("opt-correct");
@@ -877,14 +899,11 @@ function handleMathAnswer(playerIdx, chosenAnswer, btnEl) {
 
     if (fbEl) {
       fbEl.className = "math-feedback-bar err";
-      fbEl.innerHTML = `❌ Kurang tepat! Jawaban: <strong>${currentQ.explanation}</strong>`;
+      fbEl.innerHTML = `❌ Jawaban: <strong>${currentQ.explanation}</strong>`;
     }
   }
 
-  const scoreEl = document.getElementById(`math-score-${player.id}`);
-  if (scoreEl) {
-    scoreEl.textContent = player.score;
-  }
+  updateScoreDisplays(player.id, player.score);
 
   setTimeout(() => {
     player.mathIndex += 1;
@@ -968,10 +987,10 @@ function openPodiumModal() {
     const div = document.createElement("div");
     div.className = `podium-item ${isFirst ? "first-place" : ""}`;
     div.innerHTML = `
-      <div style="font-size:2.6rem;">${isFirst ? "👑" : ""} ${p.avatar}</div>
-      <div style="font-size:1.3rem;font-weight:800;">${p.name}</div>
-      <div style="font-size:2rem;font-weight:900;color:#fde047;">${p.score} Poin</div>
-      <div style="font-size:0.9rem;color:#cbd5e1;">✅ Benar: ${p.correct} &nbsp;|&nbsp; ❌ Salah: ${p.wrong}</div>
+      <div style="font-size:2.4rem;">${isFirst ? "👑" : ""} ${p.avatar}</div>
+      <div style="font-size:1.2rem;font-weight:800;">${p.name}</div>
+      <div style="font-size:1.85rem;font-weight:900;color:#fde047;">${p.score} Poin</div>
+      <div style="font-size:0.86rem;color:#cbd5e1;">✅ Benar: ${p.correct} &nbsp;|&nbsp; ❌ Salah: ${p.wrong}</div>
     `;
     listEl.appendChild(div);
   });
@@ -1004,6 +1023,15 @@ window.addEventListener("DOMContentLoaded", () => {
   );
 
   startCheerfulMusic();
+
+  // Tab Pemain Khusus Layar HP / Tablet Kecil
+  document.querySelectorAll(".m-tab-btn").forEach((btn) => {
+    btn.addEventListener("pointerdown", () => {
+      ensureAudio();
+      setMobileTab(btn.dataset.tab);
+      playFeedbackSound(true, 0);
+    });
+  });
 
   // Tombol Kembali ke Menu Pelajaran (Lobby)
   document.getElementById("btn-go-lobby").addEventListener("pointerdown", () => {
@@ -1090,7 +1118,7 @@ window.addEventListener("DOMContentLoaded", () => {
   musicBtn.addEventListener("pointerdown", () => {
     ensureAudio();
     state.musicEnabled = !state.musicEnabled;
-    musicBtn.textContent = state.musicEnabled ? "🎵 Musik: ON" : "🎵 Musik: OFF";
+    musicBtn.textContent = state.musicEnabled ? "🎵 Musik" : "🔇 Musik";
     musicBtn.classList.toggle("active", state.musicEnabled);
   });
 
@@ -1098,7 +1126,7 @@ window.addEventListener("DOMContentLoaded", () => {
   soundBtn.addEventListener("pointerdown", () => {
     ensureAudio();
     state.soundEnabled = !state.soundEnabled;
-    soundBtn.textContent = state.soundEnabled ? "🔊 Efek: ON" : "🔇 Efek: OFF";
+    soundBtn.textContent = state.soundEnabled ? "🔊 Efek" : "🔇 Efek";
   });
 
   // Modal Materi Bahasa Indonesia

@@ -34,8 +34,8 @@
 }
 
 html, body {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100dvh;
   overflow: hidden;
   font-family: var(--font-body);
   background: var(--bg-gradient);
@@ -60,10 +60,10 @@ html, body {
   z-index: 1;
   display: flex;
   flex-direction: column;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100dvh;
   padding: clamp(6px, 0.9vw, 12px) clamp(8px, 1.2vw, 16px);
-  gap: clamp(6px, 0.8vh, 10px);
+  gap: clamp(5px, 0.8vh, 10px);
   overflow: hidden;
 }
 
@@ -81,17 +81,17 @@ html, body {
   display: flex;
 }
 
-/* ================= GLOBAL TOP BAR (MENU, AUDIO, BRANDING) ================= */
+/* ================= GLOBAL TOP BAR (RESPONSIVE SEMUA PERANGKAT) ================= */
 .top-header {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  background: rgba(15, 23, 42, 0.82);
+  background: rgba(15, 23, 42, 0.84);
   backdrop-filter: blur(16px);
   border: 1.5px solid var(--glass-border);
-  border-radius: 18px;
+  border-radius: 16px;
   padding: 7px 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
   flex-shrink: 0;
 }
 
@@ -100,14 +100,14 @@ html, body {
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   width: 100%;
 }
 
 .brand-mini {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .school-badge {
@@ -115,9 +115,9 @@ html, body {
   color: #fff;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(0.85rem, 1vw, 1rem);
-  padding: 6px 12px;
-  border-radius: 11px;
+  font-size: clamp(0.78rem, 0.95vw, 0.98rem);
+  padding: 5px 10px;
+  border-radius: 10px;
   box-shadow: 0 4px 12px rgba(234, 88, 12, 0.35);
   white-space: nowrap;
 }
@@ -129,14 +129,14 @@ html, body {
 
 .brand-titles .main-t {
   font-family: var(--font-display);
-  font-size: clamp(0.95rem, 1.2vw, 1.18rem);
+  font-size: clamp(0.88rem, 1.15vw, 1.15rem);
   font-weight: 700;
   color: #ffffff;
   line-height: 1.1;
 }
 
 .brand-titles .sub-t {
-  font-size: clamp(0.72rem, 0.85vw, 0.82rem);
+  font-size: clamp(0.68rem, 0.82vw, 0.8rem);
   color: #fde047;
   font-weight: 700;
 }
@@ -148,27 +148,28 @@ html, body {
   gap: 5px;
   background: rgba(255, 255, 255, 0.06);
   padding: 4px;
-  border-radius: 13px;
+  border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.1);
+  flex-wrap: wrap;
 }
 
 .teacher-badge {
   font-family: var(--font-display);
-  font-size: clamp(0.72rem, 0.9vw, 0.88rem);
+  font-size: clamp(0.72rem, 0.88vw, 0.86rem);
   font-weight: 700;
   color: #fde047;
-  padding: 0 6px;
+  padding: 0 5px;
   white-space: nowrap;
 }
 
 .mission-btn {
-  padding: clamp(5px, 0.65vh, 8px) clamp(8px, 0.9vw, 13px);
+  padding: clamp(5px, 0.65vh, 8px) clamp(8px, 0.85vw, 12px);
   border-radius: 9px;
   border: 1.5px solid transparent;
   background: rgba(255, 255, 255, 0.08);
   color: #e2e8f0;
   font-family: var(--font-display);
-  font-size: clamp(0.74rem, 0.9vw, 0.9rem);
+  font-size: clamp(0.72rem, 0.88vw, 0.88rem);
   font-weight: 600;
   cursor: pointer;
   white-space: nowrap;
@@ -208,7 +209,7 @@ html, body {
   display: flex;
   align-items: center;
   gap: 5px;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
 }
 
 .time-control-pill {
@@ -216,18 +217,18 @@ html, body {
   align-items: center;
   background: rgba(15, 23, 42, 0.9);
   border: 1.5px solid rgba(251, 191, 36, 0.5);
-  border-radius: 11px;
-  padding: 3px 5px;
+  border-radius: 10px;
+  padding: 2px 5px;
   gap: 4px;
 }
 
 .timer-display {
   font-family: var(--font-display);
-  font-size: clamp(0.9rem, 1.15vw, 1.15rem);
+  font-size: clamp(0.85rem, 1.1vw, 1.1rem);
   font-weight: 700;
   color: #fde047;
-  padding: 1px 6px;
-  min-width: 56px;
+  padding: 1px 5px;
+  min-width: 52px;
   text-align: center;
 }
 
@@ -238,7 +239,7 @@ html, body {
   border-radius: 7px;
   padding: 3px 5px;
   font-family: var(--font-body);
-  font-size: clamp(0.7rem, 0.82vw, 0.8rem);
+  font-size: clamp(0.68rem, 0.8vw, 0.78rem);
   font-weight: 700;
   cursor: pointer;
   outline: none;
@@ -250,13 +251,13 @@ html, body {
 }
 
 .ctrl-btn {
-  padding: clamp(5px, 0.65vh, 8px) clamp(8px, 0.85vw, 12px);
-  border-radius: 10px;
+  padding: clamp(5px, 0.6vh, 8px) clamp(8px, 0.8vw, 11px);
+  border-radius: 9px;
   border: 1.5px solid rgba(255, 255, 255, 0.18);
   background: rgba(255, 255, 255, 0.1);
   color: #ffffff;
   font-family: var(--font-body);
-  font-size: clamp(0.72rem, 0.85vw, 0.84rem);
+  font-size: clamp(0.7rem, 0.82vw, 0.82rem);
   font-weight: 700;
   cursor: pointer;
   white-space: nowrap;
@@ -302,11 +303,75 @@ html, body {
   background: linear-gradient(90deg, rgba(250, 204, 21, 0.12), rgba(250, 204, 21, 0.24), rgba(250, 204, 21, 0.12));
   border: 1px solid rgba(250, 204, 21, 0.4);
   border-radius: 9px;
-  padding: 4px 12px;
-  font-size: clamp(0.78rem, 0.98vw, 0.95rem);
+  padding: 4px 10px;
+  font-size: clamp(0.74rem, 0.95vw, 0.92rem);
   font-weight: 700;
   color: #fef08a;
   text-align: center;
+  line-height: 1.3;
+}
+
+/* ================= MOBILE PLAYER SWITCHER BAR (KHUSUS HP / TABLET KECIL) ================= */
+.mobile-player-tabs {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
+  border-radius: 14px;
+  padding: 5px;
+  flex-shrink: 0;
+}
+
+.m-tab-btn {
+  flex: 1;
+  padding: 8px 6px;
+  border-radius: 10px;
+  border: 1.5px solid transparent;
+  background: rgba(255, 255, 255, 0.06);
+  color: #cbd5e1;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.m-tab-btn.active[data-tab="1"] {
+  background: var(--p1-grad);
+  color: #fff;
+  border-color: #bae6fd;
+  box-shadow: 0 3px 10px rgba(37, 99, 235, 0.4);
+}
+.m-tab-btn.active[data-tab="2"] {
+  background: var(--p2-grad);
+  color: #fff;
+  border-color: #a7f3d0;
+  box-shadow: 0 3px 10px rgba(5, 150, 105, 0.4);
+}
+.m-tab-btn.active[data-tab="3"] {
+  background: var(--p3-grad);
+  color: #fff;
+  border-color: #fde68a;
+  box-shadow: 0 3px 10px rgba(217, 119, 6, 0.4);
+}
+.m-tab-btn.active[data-tab="all"] {
+  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+  color: #fff;
+  border-color: #ddd6fe;
+}
+
+.m-tab-score {
+  background: rgba(15, 23, 42, 0.65);
+  padding: 1px 6px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  color: #fde047;
 }
 
 /* ================= SCREEN 0: MENU UTAMA PILIH PELAJARAN (LOBBY) ================= */
@@ -315,13 +380,14 @@ html, body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: clamp(10px, 1.6vh, 18px);
-  padding: clamp(8px, 1.2vh, 16px) clamp(12px, 2vw, 32px);
-  background: rgba(15, 23, 42, 0.6);
+  gap: clamp(10px, 1.5vh, 18px);
+  padding: clamp(10px, 1.5vh, 18px) clamp(12px, 2vw, 30px);
+  background: rgba(15, 23, 42, 0.62);
   backdrop-filter: blur(16px);
   border: 1.5px solid rgba(255, 255, 255, 0.18);
-  border-radius: 26px;
+  border-radius: 22px;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .lobby-hero {
@@ -329,54 +395,56 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
 }
 
 .lobby-school-pill {
   background: linear-gradient(90deg, #f59e0b, #ea580c);
   color: #ffffff;
   font-family: var(--font-display);
-  font-size: clamp(0.85rem, 1.1vw, 1.05rem);
+  font-size: clamp(0.75rem, 1vw, 1rem);
   font-weight: 700;
-  padding: 5px 18px;
+  padding: 5px 16px;
   border-radius: 999px;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.4px;
   box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
 }
 
 .lobby-hero h1 {
   font-family: var(--font-display);
-  font-size: clamp(1.7rem, 2.8vw, 2.6rem);
+  font-size: clamp(1.35rem, 2.6vw, 2.5rem);
   font-weight: 700;
   background: linear-gradient(90deg, #ffffff, #7dd3fc, #fde047);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  line-height: 1.2;
 }
 
 .lobby-author {
   font-family: var(--font-display);
-  font-size: clamp(1rem, 1.4vw, 1.3rem);
+  font-size: clamp(0.92rem, 1.3vw, 1.25rem);
   color: #fde047;
   font-weight: 600;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 /* Setup 3 Pemain di Menu Awal */
 .lobby-players-bar {
   background: rgba(255, 255, 255, 0.06);
   border: 1.5px solid rgba(255, 255, 255, 0.14);
-  border-radius: 20px;
+  border-radius: 18px;
   padding: clamp(10px, 1.4vh, 16px);
   display: flex;
   flex-direction: column;
   gap: 10px;
+  flex-shrink: 0;
 }
 
 .lobby-section-title {
   font-family: var(--font-display);
-  font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+  font-size: clamp(0.85rem, 1.1vw, 1.05rem);
   color: #bae6fd;
   text-align: center;
 }
@@ -384,14 +452,14 @@ html, body {
 .lobby-players-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
+  gap: 12px;
 }
 
 .lobby-p-card {
   display: flex;
   align-items: center;
   gap: 10px;
-  background: rgba(15, 23, 42, 0.75);
+  background: rgba(15, 23, 42, 0.78);
   padding: 8px 12px;
   border-radius: 14px;
   border: 2px solid;
@@ -401,9 +469,9 @@ html, body {
 .lobby-p-card.p3 { border-color: #fbbf24; }
 
 .lobby-av-btn {
-  font-size: 1.7rem;
-  width: 46px;
-  height: 46px;
+  font-size: 1.6rem;
+  width: 44px;
+  height: 44px;
   border-radius: 12px;
   border: 1.5px solid rgba(255,255,255,0.25);
   background: rgba(255,255,255,0.1);
@@ -418,9 +486,9 @@ html, body {
   border-bottom: 2px solid rgba(255,255,255,0.25);
   color: #ffffff;
   font-family: var(--font-display);
-  font-size: clamp(1rem, 1.2vw, 1.15rem);
+  font-size: clamp(0.95rem, 1.15vw, 1.12rem);
   font-weight: 700;
-  padding: 4px 2px;
+  padding: 3px 2px;
   outline: none;
 }
 
@@ -428,14 +496,13 @@ html, body {
 .subject-cards-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: clamp(14px, 2vw, 24px);
+  gap: clamp(12px, 1.8vw, 22px);
   flex: 1;
-  min-height: 0;
 }
 
 .subject-card {
-  border-radius: 24px;
-  padding: clamp(16px, 2.2vh, 26px);
+  border-radius: 22px;
+  padding: clamp(14px, 2vh, 24px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -448,32 +515,32 @@ html, body {
 }
 
 .subject-card:active {
-  transform: scale(0.97);
+  transform: scale(0.98);
 }
 
 .subject-card.card-bindo {
   background: linear-gradient(145deg, rgba(14, 165, 233, 0.28) 0%, rgba(30, 58, 138, 0.55) 100%);
   border-color: #38bdf8;
-  box-shadow: 0 12px 30px rgba(2, 132, 199, 0.3);
+  box-shadow: 0 10px 26px rgba(2, 132, 199, 0.28);
 }
 
 .subject-card.card-math {
   background: linear-gradient(145deg, rgba(16, 185, 129, 0.28) 0%, rgba(6, 78, 59, 0.55) 100%);
   border-color: #34d399;
-  box-shadow: 0 12px 30px rgba(5, 150, 105, 0.3);
+  box-shadow: 0 10px 26px rgba(5, 150, 105, 0.28);
 }
 
 .subject-top {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
 }
 
 .subject-icon {
-  font-size: clamp(2.4rem, 3.6vw, 3.4rem);
-  width: clamp(64px, 5.5vw, 80px);
-  height: clamp(64px, 5.5vw, 80px);
-  border-radius: 20px;
+  font-size: clamp(2rem, 3.2vw, 3.2rem);
+  width: clamp(54px, 5vw, 76px);
+  height: clamp(54px, 5vw, 76px);
+  border-radius: 18px;
   background: rgba(255, 255, 255, 0.16);
   display: flex;
   align-items: center;
@@ -484,37 +551,37 @@ html, body {
 
 .subject-tag {
   display: inline-block;
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.6px;
-  padding: 4px 10px;
+  letter-spacing: 0.5px;
+  padding: 3px 9px;
   border-radius: 999px;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
 }
 .card-bindo .subject-tag { background: #0284c7; color: #e0f2fe; }
 .card-math .subject-tag { background: #059669; color: #d1fae5; }
 
 .subject-title {
   font-family: var(--font-display);
-  font-size: clamp(1.3rem, 1.8vw, 1.75rem);
+  font-size: clamp(1.2rem, 1.7vw, 1.7rem);
   font-weight: 700;
   color: #ffffff;
 }
 
 .subject-desc {
-  font-size: clamp(0.88rem, 1.05vw, 1rem);
+  font-size: clamp(0.84rem, 1vw, 0.98rem);
   color: #e2e8f0;
-  line-height: 1.45;
+  line-height: 1.42;
 }
 
 .subject-play-btn {
   width: 100%;
-  padding: 12px;
-  border-radius: 14px;
+  padding: 11px;
+  border-radius: 13px;
   border: none;
   font-family: var(--font-display);
-  font-size: clamp(1rem, 1.25vw, 1.2rem);
+  font-size: clamp(0.92rem, 1.15vw, 1.15rem);
   font-weight: 700;
   color: #ffffff;
   cursor: pointer;
@@ -533,7 +600,7 @@ html, body {
   background: linear-gradient(135deg, #10b981, #059669);
 }
 
-/* ================= 3 PLAYER ARENA (DIGUNAKAN B.INDONESIA & MATEMATIKA) ================= */
+/* ================= 3 PLAYER ARENA (RESPONSIF DESKTOP & HP) ================= */
 .arena-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -541,10 +608,11 @@ html, body {
   flex: 1;
   min-height: 0;
   width: 100%;
+  position: relative;
 }
 
 .player-column {
-  border-radius: 22px;
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -561,7 +629,7 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 14px;
+  padding: 8px 12px;
   background: rgba(15, 23, 42, 0.65);
   border-bottom: 1.5px solid rgba(255, 255, 255, 0.14);
   z-index: 10;
@@ -570,19 +638,20 @@ html, body {
 .player-info {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   cursor: pointer;
 }
 
 .player-avatar {
-  font-size: clamp(1.3rem, 1.7vw, 1.65rem);
-  width: clamp(34px, 3vw, 42px);
-  height: clamp(34px, 3vw, 42px);
-  border-radius: 12px;
+  font-size: clamp(1.2rem, 1.6vw, 1.6rem);
+  width: clamp(32px, 2.8vw, 42px);
+  height: clamp(32px, 2.8vw, 42px);
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  flex-shrink: 0;
 }
 
 .col-1 .player-avatar { background: var(--p1-grad); }
@@ -591,13 +660,13 @@ html, body {
 
 .player-name {
   font-family: var(--font-display);
-  font-size: clamp(0.98rem, 1.25vw, 1.2rem);
+  font-size: clamp(0.92rem, 1.2vw, 1.18rem);
   font-weight: 700;
   color: #ffffff;
 }
 
 .player-sub {
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   color: #94a3b8;
   display: block;
 }
@@ -605,23 +674,23 @@ html, body {
 .player-score-box {
   display: flex;
   align-items: baseline;
-  gap: 5px;
+  gap: 4px;
   background: rgba(15, 23, 42, 0.85);
-  padding: 4px 13px;
+  padding: 4px 11px;
   border-radius: 999px;
   border: 1.5px solid rgba(255, 255, 255, 0.22);
 }
 
 .score-number {
   font-family: var(--font-display);
-  font-size: clamp(1.2rem, 1.6vw, 1.55rem);
+  font-size: clamp(1.1rem, 1.5vw, 1.5rem);
   font-weight: 700;
   color: #fde047;
   transition: transform 0.15s ease;
 }
 
 .score-unit {
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 700;
   color: #cbd5e1;
   text-transform: uppercase;
@@ -644,7 +713,7 @@ html, body {
   justify-content: center;
   text-align: center;
   cursor: pointer;
-  padding: 10px;
+  padding: 8px;
   z-index: 5;
   transition: transform 0.08s ease;
   will-change: transform, bottom, left;
@@ -712,13 +781,13 @@ html, body {
 .bubble-pts-badge {
   position: relative;
   z-index: 2;
-  margin-top: 4px;
+  margin-top: 3px;
   font-family: var(--font-display);
-  font-size: 0.74rem;
+  font-size: 0.7rem;
   font-weight: 700;
   color: #ffffff;
   background: rgba(15, 23, 42, 0.78);
-  padding: 2px 8px;
+  padding: 2px 7px;
   border-radius: 999px;
   pointer-events: none;
 }
@@ -753,22 +822,22 @@ html, body {
   pointer-events: none;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   text-align: center;
   z-index: 30;
   animation: floatUpScore 0.95s ease-out forwards;
 }
 .floating-score.plus { color: #4ade80; text-shadow: 0 3px 10px rgba(0, 0, 0, 0.65); }
-.floating-score.minus { color: #fb7185; font-size: 1.3rem; text-shadow: 0 3px 10px rgba(0, 0, 0, 0.65); }
+.floating-score.minus { color: #fb7185; font-size: 1.25rem; text-shadow: 0 3px 10px rgba(0, 0, 0, 0.65); }
 .floating-score .float-note {
   display: inline-block;
   font-family: var(--font-body);
-  font-size: 0.76rem;
+  font-size: 0.72rem;
   font-weight: 800;
   color: #0f172a;
   background: rgba(255, 255, 255, 0.95);
-  padding: 3px 8px;
-  border-radius: 8px;
+  padding: 2px 7px;
+  border-radius: 7px;
   margin-top: 2px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
   white-space: nowrap;
@@ -780,51 +849,52 @@ html, body {
   100% { transform: translateY(-70px) scale(1); opacity: 0; }
 }
 
-/* ================= GAME 2: KUIS 5 SOAL CERITA MATEMATIKA (3 PEMAIN) ================= */
+/* ================= GAME 2: KUIS 5 SOAL CERITA MATEMATIKA ================= */
 .math-lane-body {
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: clamp(10px, 1.3vh, 16px);
-  gap: clamp(8px, 1.1vh, 14px);
+  padding: clamp(8px, 1.2vh, 14px);
+  gap: clamp(6px, 1vh, 12px);
   min-height: 0;
+  overflow-y: auto;
 }
 
-/* Bar Progres 5 Soal */
 .math-progress-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
+  gap: 6px;
   background: rgba(15, 23, 42, 0.6);
-  padding: 6px 12px;
+  padding: 6px 10px;
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.12);
+  flex-shrink: 0;
 }
 
 .math-q-counter {
   font-family: var(--font-display);
-  font-size: 0.9rem;
+  font-size: clamp(0.78rem, 0.95vw, 0.9rem);
   font-weight: 700;
   color: #fde047;
 }
 
 .math-dots {
   display: flex;
-  gap: 6px;
+  gap: 5px;
 }
 
 .math-dot {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.12);
   border: 1.5px solid rgba(255, 255, 255, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 800;
   color: #cbd5e1;
 }
@@ -833,7 +903,7 @@ html, body {
   border-color: #fde047;
   background: rgba(250, 204, 21, 0.25);
   color: #ffffff;
-  transform: scale(1.1);
+  transform: scale(1.08);
 }
 
 .math-dot.done-ok {
@@ -848,30 +918,29 @@ html, body {
   color: #ffffff;
 }
 
-/* Kartu Soal Cerita */
 .math-story-card {
   flex: 1;
   background: rgba(15, 23, 42, 0.78);
   border: 2px solid rgba(255, 255, 255, 0.18);
-  border-radius: 18px;
-  padding: clamp(12px, 1.6vh, 20px);
+  border-radius: 16px;
+  padding: clamp(10px, 1.4vh, 18px);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  gap: 10px;
+  gap: 8px;
   position: relative;
   box-shadow: inset 0 2px 12px rgba(0, 0, 0, 0.35);
 }
 
 .math-op-badge {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 800;
-  padding: 4px 12px;
+  padding: 3px 10px;
   border-radius: 999px;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.4px;
 }
 
 .math-op-badge.op-add {
@@ -887,40 +956,40 @@ html, body {
 }
 
 .math-emoji-icon {
-  font-size: clamp(2.2rem, 3.2vw, 3rem);
+  font-size: clamp(1.8rem, 2.8vw, 2.8rem);
   line-height: 1;
 }
 
 .math-story-text {
-  font-size: clamp(0.95rem, 1.18vw, 1.15rem);
+  font-size: clamp(0.88rem, 1.12vw, 1.12rem);
   font-weight: 700;
   color: #f8fafc;
-  line-height: 1.48;
+  line-height: 1.42;
 }
 
-/* Pilihan Ganda 4 Tombol Besar */
 .math-options-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  height: clamp(120px, 19vh, 165px);
+  gap: 8px;
+  min-height: clamp(100px, 17vh, 155px);
+  flex-shrink: 0;
 }
 
 .math-opt-btn {
-  border-radius: 16px;
+  border-radius: 14px;
   border: 2px solid rgba(255, 255, 255, 0.22);
   background: linear-gradient(145deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.05));
   color: #ffffff;
   font-family: var(--font-display);
-  font-size: clamp(1.2rem, 1.6vw, 1.55rem);
+  font-size: clamp(1.05rem, 1.45vw, 1.45rem);
   font-weight: 700;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  transition: transform 0.1s ease, background 0.18s ease, border-color 0.18s ease;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+  padding: 8px;
+  transition: transform 0.1s ease, background 0.18s ease;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.25);
 }
 
 .math-opt-btn:active {
@@ -930,7 +999,6 @@ html, body {
 .math-opt-btn.opt-correct {
   background: linear-gradient(135deg, #22c55e, #15803d) !important;
   border-color: #bbf7d0 !important;
-  transform: scale(1.03);
 }
 
 .math-opt-btn.opt-wrong {
@@ -939,11 +1007,11 @@ html, body {
 }
 
 .math-feedback-bar {
-  min-height: 40px;
+  min-height: 36px;
   background: rgba(15, 23, 42, 0.85);
-  border-radius: 12px;
-  padding: 6px 12px;
-  font-size: 0.84rem;
+  border-radius: 10px;
+  padding: 5px 10px;
+  font-size: 0.78rem;
   font-weight: 700;
   display: flex;
   align-items: center;
@@ -951,6 +1019,7 @@ html, body {
   text-align: center;
   color: #cbd5e1;
   border: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
 }
 
 .math-feedback-bar.ok {
@@ -965,32 +1034,31 @@ html, body {
   background: rgba(136, 19, 55, 0.55);
 }
 
-/* Layar Selesai 5 Soal di Kolom Pemain */
 .math-finish-panel {
   flex: 1;
   background: rgba(15, 23, 42, 0.82);
   border: 2px dashed #fde047;
-  border-radius: 20px;
-  padding: 20px;
+  border-radius: 18px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 /* ================= MODERN MODALS (MATERI & PODIUM) ================= */
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(2, 6, 23, 0.78);
+  background: rgba(2, 6, 23, 0.8);
   backdrop-filter: blur(10px);
   display: none;
   align-items: center;
   justify-content: center;
   z-index: 100;
-  padding: 16px;
+  padding: 12px;
 }
 
 .modal-backdrop.show {
@@ -1000,20 +1068,22 @@ html, body {
 .modal-sheet {
   background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
   border: 2px solid rgba(255, 255, 255, 0.22);
-  border-radius: 26px;
-  padding: 24px;
+  border-radius: 24px;
+  padding: clamp(16px, 2.5vw, 24px);
   max-width: 860px;
+  max-height: 92dvh;
+  overflow-y: auto;
   width: 100%;
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65);
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
   color: #ffffff;
 }
 
 .modal-sheet h2 {
   font-family: var(--font-display);
-  font-size: 1.65rem;
+  font-size: clamp(1.25rem, 2vw, 1.65rem);
   color: #fde047;
   text-align: center;
 }
@@ -1021,50 +1091,128 @@ html, body {
 .materi-cards {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 14px;
+  gap: 12px;
 }
 
 .m-card {
-  padding: 16px;
-  border-radius: 18px;
+  padding: 14px;
+  border-radius: 16px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 .m-card.prep { background: rgba(14, 165, 233, 0.15); border: 2px solid #38bdf8; }
 .m-card.imb { background: rgba(168, 85, 247, 0.15); border: 2px solid #c084fc; }
-.m-card h3 { font-family: var(--font-display); font-size: 1.2rem; color: #ffffff; }
-.m-card p { font-size: 0.95rem; color: #cbd5e1; line-height: 1.4; }
-.m-examples { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 4px; }
+.m-card h3 { font-family: var(--font-display); font-size: 1.1rem; color: #ffffff; }
+.m-card p { font-size: 0.9rem; color: #cbd5e1; line-height: 1.4; }
+.m-examples { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
 .m-pill {
   background: rgba(255, 255, 255, 0.14);
   color: #ffffff;
-  padding: 5px 12px;
+  padding: 4px 10px;
   border-radius: 999px;
   font-weight: 800;
-  font-size: 0.92rem;
+  font-size: 0.85rem;
   border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
 .podium-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
+  gap: 12px;
 }
 
 .podium-item {
   background: rgba(255, 255, 255, 0.06);
   border: 2px solid rgba(255, 255, 255, 0.15);
-  border-radius: 20px;
-  padding: 18px;
+  border-radius: 18px;
+  padding: 14px;
   text-align: center;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
 }
 
 .podium-item.first-place {
   background: linear-gradient(180deg, rgba(250, 204, 21, 0.22), rgba(15, 23, 42, 0.9));
   border-color: #facc15;
-  transform: scale(1.03);
+}
+
+/* ============================================================================
+   MEDIA QUERIES: RESPONSIF UNTUK HP (SMARTPHONE) & TABLET PORTRAIT
+   ============================================================================ */
+@media (max-width: 900px) {
+  .brand-titles {
+    display: none; /* Hemat ruang di layar HP/Tablet kecil */
+  }
+
+  .lobby-players-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .subject-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .materi-cards,
+  .podium-row {
+    grid-template-columns: 1fr;
+  }
+
+  /* Tampilkan Tab Switcher Pemain di HP */
+  .mobile-player-tabs.visible-in-game {
+    display: flex;
+  }
+
+  /* Mode 1 Kolom Penuh di HP (agar gelembung & soal cerita besar dan jelas!) */
+  .arena-grid.mobile-single-mode {
+    display: block;
+    position: relative;
+  }
+
+  .arena-grid.mobile-single-mode .player-column {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1;
+    transition: opacity 0.2s ease;
+  }
+
+  .arena-grid.mobile-single-mode .player-column.mobile-active-col {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 5;
+  }
+}
+
+@media (max-width: 540px) {
+  .app-wrapper {
+    padding: 5px 6px;
+    gap: 5px;
+  }
+
+  .top-header {
+    padding: 6px 8px;
+    border-radius: 13px;
+    gap: 4px;
+  }
+
+  .teacher-badge {
+    display: none;
+  }
+
+  .mission-banner-bar {
+    font-size: 0.72rem;
+    padding: 3px 6px;
+  }
+
+  .m-tab-btn {
+    font-size: 0.75rem;
+    padding: 6px 4px;
+  }
 }
